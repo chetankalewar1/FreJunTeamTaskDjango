@@ -19,6 +19,8 @@ from core.views import CreateTeamViewSet, TaskViewset, StatusChangeReportViewset
 from rest_framework.routers import DefaultRouter
 from django.conf import settings
 from rest_framework.authtoken.views import obtain_auth_token  # <-- Here
+from rest_framework_simplejwt import views as jwt_views
+
 from django.conf.urls.static import static
 
 
@@ -30,8 +32,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('team', CreateTeamViewSet.as_view(), name='team'),
     path('availability/', AvailabilityViewset.as_view(), name='availability'),
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    # path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
     path('', include(router.urls)),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
