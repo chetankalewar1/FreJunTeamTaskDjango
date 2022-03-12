@@ -108,7 +108,6 @@ class TaskViewset(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.Updat
             # task_id = str(uuid.uuid4())
             # task_s.apply_async(args=(json_dicter, task_id), eta=eta1, task_id=task_id)
 
-
             return Response({"success": True, "msg": "Team created successfully."})
 
         else:
